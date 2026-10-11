@@ -1,4 +1,5 @@
 <?php
+require_once 'auth.php';
 require 'db.php';
 
 if (!isset($_GET['id'])) {
@@ -8,7 +9,7 @@ if (!isset($_GET['id'])) {
 $id = intval($_GET['id']);
 
 // Charger la prescription + consultation + patient + médecin
-$sql = "
+$stmt = $conn->prepare("
 SELECT 
     p.id_prescription,
     p.ordonnance,
@@ -25,11 +26,11 @@ FROM prescription p
 JOIN consultation c ON p.id_consultation = c.id_consultation
 JOIN patient pat ON c.no_dossier = pat.no_dossier
 JOIN medecin m ON c.code_medecin = m.code_medecin
-WHERE p.id_prescription = $id
-";
-
-$result = mysqli_query($conn, $sql);
-$data = mysqli_fetch_assoc($result);
+WHERE p.id_prescription = ?
+");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$data = $stmt->get_result()->fetch_assoc();
 
 if (!$data) {
     die("Ordonnance introuvable.");
@@ -39,7 +40,8 @@ if (!$data) {
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Ordonnance – <?= $data['patient_nom'] ?></title>
+<title>Ordonnance | MEDMAS</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
 body {
@@ -86,32 +88,32 @@ body {
 
 <body>
 
-<button class="print-btn" onclick="window.print()">🖨️ Imprimer</button>
+<button class="print-btn" onclick="window.print()"><i class="bi bi-printer"></i> Imprimer</button>
 
 <div class="print-header">
     <h2>Ordonnance Médicale</h2>
-    <p><em>Clinique Groupe 7 — Système de Gestion MEDMAS</em></p>
+    <p><em>MEDMAS — Gestion clinique · Powered by DeepLow Lab / Shoal</em></p>
 </div>
 
 <div class="info-block">
     <p><span class="label">Médecin :</span> 
-        Dr. <?= $data['med_prenom'] . " " . $data['med_nom'] ?> (<?= $data['specialisation'] ?>)
+        Dr. <?= htmlspecialchars($data['med_prenom'] . " " . $data['med_nom']) ?> (<?= htmlspecialchars($data['specialisation']) ?>)
     </p>
-    <p><span class="label">Date consultation :</span> <?= $data['date_consultation'] ?></p>
+    <p><span class="label">Date consultation :</span> <?= htmlspecialchars($data['date_consultation']) ?></p>
 </div>
 
 <div class="info-block">
     <p><span class="label">Patient :</span> 
-        <?= $data['patient_prenom'] . " " . $data['patient_nom'] ?>
+        <?= htmlspecialchars($data['patient_prenom'] . " " . $data['patient_nom']) ?>
     </p>
-    <p><span class="label">Âge :</span> <?= $data['age'] ?> ans</p>
-    <p><span class="label">Sexe :</span> <?= $data['patient_sexe'] ?></p>
-    <p><span class="label">No dossier :</span> <?= $data['no_dossier'] ?></p>
+    <p><span class="label">Âge :</span> <?= htmlspecialchars($data['age']) ?> ans</p>
+    <p><span class="label">Sexe :</span> <?= htmlspecialchars($data['patient_sexe']) ?></p>
+    <p><span class="label">No dossier :</span> <?= htmlspecialchars($data['no_dossier']) ?></p>
 </div>
 
-<h3>📝 Ordonnance</h3>
+<h3><i class="bi bi-file-medical"></i> Ordonnance</h3>
 <div class="ordonnance-box">
-    <?= nl2br($data['ordonnance']) ?>
+    <?= nl2br(htmlspecialchars($data['ordonnance'])) ?>
 </div>
 
 </body>

@@ -1,4 +1,5 @@
-<?php 
+<?php
+require_once 'auth.php';
 include 'includes/header.php';
 include 'db.php';
 
@@ -16,11 +17,12 @@ $result = $conn->query($sql);
 ?>
 
 <div class="container">
-    <h2>📄 Liste des Prescriptions</h2>
+    <div class="page-toolbar">
+        <h2><i class="bi bi-file-medical"></i> Prescriptions</h2>
+        <a href="add_prescription.php" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Nouvelle prescription</a>
+    </div>
 
-    <a href="add_prescription.php" class="btn">➕ Nouvelle Prescription</a>
-
-    <table>
+    <div class="table-wrap"><table>
         <tr>
             <th>ID</th>
             <th>Patient</th>
@@ -32,15 +34,15 @@ $result = $conn->query($sql);
         <?php while ($row = $result->fetch_assoc()): ?>
         <tr>
             <td><?= $row['id_prescription'] ?></td>
-            <td><?= $row['patient_nom'] . " " . $row['patient_prenom'] ?></td>
-            <td>Dr. <?= $row['medecin_nom'] ?></td>
-            <td><?= $row['date_consultation'] ?></td>
+            <td><?= htmlspecialchars($row['patient_nom'] . " " . $row['patient_prenom']) ?></td>
+            <td>Dr. <?= htmlspecialchars($row['medecin_nom']) ?></td>
+            <td><?= htmlspecialchars($row['date_consultation']) ?></td>
             <td>
                 <a class="btn-small" href="view_prescription.php?id=<?= $row['id_prescription'] ?>">Voir</a>
             </td>
         </tr>
         <?php endwhile; ?>
-    </table>
+    </table></div>
 </div>
 
 <?php include 'includes/footer.php'; ?>

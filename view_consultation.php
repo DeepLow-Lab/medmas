@@ -43,8 +43,8 @@ $prescription = $pres_sql->get_result()->fetch_assoc();
 
 <div class="container mt-4">
 
-    <a href="patients.php" class="btn btn-secondary mb-3">⬅ Retour aux patients</a>
-    <a href="view_patient.php?id=<?= $consult['no_dossier'] ?>" class="btn btn-secondary mb-3">⬅ Retour au patient</a>
+    <a href="patients.php" class="btn btn-secondary mb-3"><i class="bi bi-arrow-left"></i> Retour aux patients</a>
+    <a href="view_patient.php?id=<?= $consult['no_dossier'] ?>" class="btn btn-secondary mb-3"><i class="bi bi-arrow-left"></i> Retour au patient</a>
 
     <h2 class="mb-4">Consultation du <?= $consult['date_consultation'] ?></h2>
 
@@ -88,14 +88,14 @@ $prescription = $pres_sql->get_result()->fetch_assoc();
                    class="btn btn-info">Voir l’ordonnance</a>
 
                 <a href="print_prescription.php?id=<?= $prescription['id_prescription'] ?>" 
-                   class="btn btn-primary">🖨 Imprimer</a>
+                   class="btn btn-primary"><i class="bi bi-printer"></i> Imprimer</a>
 
             <?php else: ?>
 
                 <p>Aucune prescription enregistrée pour cette consultation.</p>
 
                 <a href="add_prescription.php?consultation=<?= $consult['id_consultation'] ?>" 
-                   class="btn btn-success">➕ Ajouter une prescription</a>
+                   class="btn btn-success"><i class="bi bi-plus-lg"></i> Ajouter une prescription</a>
 
             <?php endif; ?>
 

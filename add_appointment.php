@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <div class="container mt-4">
-    <h2>📅 Nouveau rendez-vous</h2>
+    <h2><i class="bi bi-calendar2-plus"></i> Nouveau rendez-vous</h2>
 
     <?php if ($error): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>

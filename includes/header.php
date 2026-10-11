@@ -8,50 +8,12 @@ if (session_status() === PHP_SESSION_NONE) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Clinic System</title>
+    <title>MEDMAS | Gestion clinique</title>
 
     <!-- CSS principal -->
     <link rel="stylesheet" href="assets/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-
-    <!-- Dark Mode Script -->
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const body = document.body;
-
-        // Charger le thème depuis localStorage
-        if (localStorage.getItem("theme") === "dark") {
-            body.classList.add("dark");
-        }
-
-        const themeToggle = document.getElementById("themeToggle");
-
-        // Détecte si le bouton existe (par sécurité)
-        document.addEventListener("click", function(e) {
-            if (e.target && e.target.id === "themeToggle") {
-                body.classList.toggle("dark");
-
-                // Sauvegarde du thème
-                if (body.classList.contains("dark")) {
-                    localStorage.setItem("theme", "dark");
-                    e.target.textContent = "☀️";
-                } else {
-                    localStorage.setItem("theme", "light");
-                    e.target.textContent = "🌙";
-                }
-            }
-        });
-
-        // Ajuste l'icône selon le thème actuel
-        setTimeout(() => {
-            const toggleIcon = document.getElementById("themeToggle");
-            if (toggleIcon) {
-                toggleIcon.textContent = body.classList.contains("dark") ? "☀️" : "🌙";
-            }
-        }, 50);
-    });
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
 
@@ -67,31 +29,21 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <!-- TOPBAR -->
         <div class="topbar">
-            <button class="btn btn-primary theme-toggle" id="toggleSidebar">☰</button>
-             <h2 style="color: white;">Gestion de la Clinique</h2>
+            <button class="btn-burger" id="toggleSidebar" aria-label="Réduire le menu"><i class="bi bi-layout-sidebar-inset"></i></button>
+             <h2>Gestion clinique MEDMAS</h2>
             
             <div class="user-info">
 
                 <!-- Bouton Dark Mode -->
-                <button id="themeToggle" class="theme-btn">🌙</button>
+                <button class="theme-toggle theme-btn" aria-label="Changer de thème"><i class="bi bi-moon-stars"></i></button>
 
                 <!-- Nom de l'utilisateur -->
                 <span>
-                    👨‍⚕️ <?= $_SESSION['nom'] ?? 'Utilisateur' ?>
+                    <i class="bi bi-person-badge"></i> <?= htmlspecialchars(($_SESSION['prenom'] ?? '') . ' ' . ($_SESSION['nom'] ?? 'Utilisateur')) ?>
                 </span>
 
                 <!-- Logout -->
-                <a href="logout.php" class="logout">Déconnexion</a>
+                <a href="logout.php" class="logout"><i class="bi bi-box-arrow-right"></i> Déconnexion</a>
             </div>
         </div>
-<script>
-  document.getElementById('toggleSidebar').addEventListener('click', function() {
-    const sidebar = document.getElementById('sidebar');
-    // Vérifier si la sidebar est visible
-    if (sidebar.style.display === 'none' || !sidebar.style.display) {
-      sidebar.style.display = 'block'; // afficher
-    } else {
-      sidebar.style.display = 'none'; // cacher
-    }
-  });
-</script>
+<script src="assets/js/main.js" defer></script>

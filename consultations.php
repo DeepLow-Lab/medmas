@@ -21,10 +21,12 @@ $result = $conn->query($sql);
 <?php include 'includes/header.php'; ?> 
 
 <div class="container">
-    <h1>Liste des Consultations</h1>
-    <a class="btn" href="add_consultation.php">➕ Nouvelle Consultation</a>
+    <div class="page-toolbar">
+        <h1><i class="bi bi-clipboard2-pulse"></i> Consultations</h1>
+        <a class="btn btn-primary" href="add_consultation.php"><i class="bi bi-plus-lg"></i> Nouvelle consultation</a>
+    </div>
 
-    <table>
+    <div class="table-wrap"><table>
         <thead>
             <tr>
                 <th>ID</th>
@@ -45,6 +47,6 @@ $result = $conn->query($sql);
                 </tr>
             <?php endwhile; ?>
         </tbody>
-    </table>
+    </table></div>
 </div>
 <?php include 'includes/footer.php'; ?> 

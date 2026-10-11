@@ -1,4 +1,5 @@
 <?php 
+require_once 'auth.php';
 include 'includes/header.php';
 include 'db.php';
 
@@ -13,7 +14,7 @@ $consultations = $conn->query($sql);
 ?>
 
 <div class="container">
-    <h2>➕ Nouvelle Prescription</h2>
+    <h2><i class="bi bi-file-medical"></i> Nouvelle prescription</h2>
 
     <form action="" method="POST">
         
@@ -23,8 +24,8 @@ $consultations = $conn->query($sql);
             <?php while ($c = $consultations->fetch_assoc()): ?>
             <option value="<?= $c['id_consultation'] ?>">
                 #<?= $c['id_consultation'] ?> - 
-                <?= $c['patient_nom'] . " " . $c['patient_prenom'] ?> 
-                (<?= $c['date_consultation'] ?>)
+                <?= htmlspecialchars($c['patient_nom'] . " " . $c['patient_prenom']) ?>
+                (<?= htmlspecialchars($c['date_consultation']) ?>)
             </option>
             <?php endwhile; ?>
         </select>

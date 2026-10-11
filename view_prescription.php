@@ -1,4 +1,5 @@
-<?php 
+<?php
+require_once 'auth.php';
 include 'includes/header.php';
 include 'db.php';
 
@@ -49,7 +50,7 @@ if (!$data) {
 
 <a href="print_prescription.php?id=<?= htmlspecialchars($data['id_prescription']) ?>" 
    class="btn btn-primary" target="_blank">
-    🖨️ Imprimer l’ordonnance
+    <i class="bi bi-printer"></i> Imprimer l’ordonnance
 </a>
 
 <?php include 'includes/footer.php'; ?>

@@ -28,13 +28,12 @@ $result = $stmt->get_result();
 ?>
 
 <div class="container mt-4">
-    <h2>📅 Mes rendez-vous</h2>
-
-    <div class="mb-3">
-        <a href="add_appointment.php" class="btn">➕ Nouveau rendez-vous</a>
+    <div class="page-toolbar">
+        <h2><i class="bi bi-calendar2-week"></i> Rendez-vous</h2>
+        <a href="add_appointment.php" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Nouveau rendez-vous</a>
     </div>
 
-    <table>
+    <div class="table-wrap"><table>
         <thead>
             <tr>
                 <th>Date</th>
@@ -75,7 +74,7 @@ $result = $stmt->get_result();
             <?php endwhile; ?>
         <?php endif; ?>
         </tbody>
-    </table>
+    </table></div>
 </div>
 
 <?php include 'includes/footer.php'; ?>

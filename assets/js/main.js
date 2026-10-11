@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       body.classList.toggle('dark');
       localStorage.setItem(themeKey, body.classList.contains('dark') ? 'dark' : 'light');
+      themeBtns.forEach(toggle => {
+        const icon = toggle.querySelector('i');
+        if (icon) icon.className = body.classList.contains('dark') ? 'bi bi-sun' : 'bi bi-moon-stars';
+      });
     });
   });
 

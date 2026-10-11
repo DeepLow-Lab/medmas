@@ -11,28 +11,18 @@ if (!isset($_SESSION['code_medecin'])) {
 $result = $conn->query("SELECT * FROM medecin ORDER BY nom ASC");
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <?php include 'includes/header.php'; ?> 
-    <meta charset="UTF-8">
-    <title>Médecins</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
+<?php include 'includes/header.php'; ?>
 
 <div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Liste des Médecins</h2>
-        <a href="ajouter_medecin.php" class="btn btn-primary">Ajouter un Médecin</a>
+    <div class="page-toolbar">
+        <h2><i class="bi bi-person-vcard"></i> Médecins</h2>
+        <a href="add_medecin.php" class="btn btn-primary"><i class="bi bi-person-plus"></i> Ajouter un médecin</a>
     </div>
 
     <div>
         <div>
 
-            <table>
+            <div class="table-wrap"><table>
                 <thead>
                     <tr>
                         <th>Code</th>
@@ -73,7 +63,7 @@ $result = $conn->query("SELECT * FROM medecin ORDER BY nom ASC");
                 <?php endwhile; ?>
                 </tbody>
 
-            </table>
+            </table></div>
 
         </div>
     </div>

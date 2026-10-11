@@ -60,7 +60,7 @@ $rdvs = $rdv_sql->get_result();
 
 <div class="container mt-4">
 
-    <a href="patients.php" class="btn btn-secondary mb-3">⬅ Retour</a>
+    <a href="patients.php" class="btn btn-secondary mb-3"><i class="bi bi-arrow-left"></i> Retour</a>
 
     <h2 class="mb-3">Dossier du patient : <?= $patient['nom'] . " " . $patient['prenom'] ?></h2>
 
@@ -114,7 +114,7 @@ $rdvs = $rdv_sql->get_result();
             <?php endif; ?>
             <br>
             <a href="add_consultation.php?patient=<?= $patient['no_dossier'] ?>" class="btn btn-success mb-3">
-                ➕ Nouvelle consultation
+                <i class="bi bi-plus-lg"></i> Nouvelle consultation
             </a>
 
         </div>
@@ -163,7 +163,7 @@ $rdvs = $rdv_sql->get_result();
         <div class="card-body">
 
             <a href="add_appointment.php?patient=<?= $patient['no_dossier'] ?>" class="btn btn-success mb-3">
-                ➕ Nouveau rendez-vous
+                <i class="bi bi-plus-lg"></i> Nouveau rendez-vous
             </a>
 
             <?php if ($rdvs->num_rows > 0): ?>

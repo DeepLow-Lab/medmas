@@ -23,22 +23,17 @@ if (isset($_GET['search'])) {
 
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Patients - Clinique</title>
-    
-    <?php include 'includes/header.php'; ?> 
-</head>
-
-<body>
+<?php include 'includes/header.php'; ?>
 
 <div class="container mt-4">
 
     <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="page-title">👤 Liste des patients</h2>
-        <a href="dashboard.php" class="btn btn-secondary">⬅ Retour</a>
+    <div class="page-toolbar">
+        <h2 class="page-title"><i class="bi bi-people"></i> Patients</h2>
+        <div>
+            <a href="add_patient.php" class="btn btn-primary"><i class="bi bi-person-plus"></i> Ajouter un patient</a>
+            <a href="dashboard.php" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Retour</a>
+        </div>
     </div>
 
     <!-- Barre de recherche -->
@@ -48,14 +43,8 @@ if (isset($_GET['search'])) {
         <button class="btn btn-primary">Rechercher</button>
     </form>
 
-    <!-- Ajouter un patient -->
-    <div class="mb-3">
-        <a href="add_patient.php" class="btn btn-success">➕ Ajouter un patient</a>
-    </div>
-
     <!-- Tableau -->
-    
-            <table>
+            <div class="table-wrap"><table>
                 <thead>
                 <tr>
                     <th>No dossier</th>
@@ -79,12 +68,12 @@ if (isset($_GET['search'])) {
                             <td><?= $row['telephone'] ?></td>
                             <td><?= $row['age'] ?></td>
                             <td>
-                                <a href="view_patient.php?id=<?= $row['no_dossier'] ?>" class="btn btn-sm btn-info">👁 Voir</a>
-                                <a href="edit_patient.php?id=<?= $row['no_dossier'] ?>" class="btn btn-sm btn-warning">✏ Modifier</a>
+                                <a href="view_patient.php?id=<?= $row['no_dossier'] ?>" class="btn btn-sm btn-info"><i class="bi bi-eye"></i> Voir</a>
+                                <a href="edit_patient.php?id=<?= $row['no_dossier'] ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i> Modifier</a>
                                 <a href="delete.php?id=<?= $row['no_dossier'] ?>" 
                                    class="btn btn-sm btn-danger"
                                    onclick="return confirm('Supprimer ce patient ? Cette action est irréversible.');">
-                                    🗑 Supprimer
+                                    <i class="bi bi-trash3"></i> Supprimer
                                 </a>
                             </td>
                         </tr>
@@ -96,7 +85,7 @@ if (isset($_GET['search'])) {
                 <?php endif; ?>
                 </tbody>
 
-            </table>
+            </table></div>
 
 </div>
 

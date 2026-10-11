@@ -1,16 +1,11 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-session_start();
+require_once "auth.php";
 require_once "db.php";
 
-//(Optionnel) On peut vérifier si l'utilisateur connecté est admin
-// if (!isset($_SESSION['admin']) || $_SESSION['admin'] != 1) {
-//     header("Location: dashboard.php?error=no_access");
-//     exit;
-// }
+if (empty($_SESSION['is_admin'])) {
+    header("Location: dashboard.php?error=no_access");
+    exit;
+}
 
 $success = $error = "";
 
@@ -24,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email     = $_POST['email'];
     $spec      = $_POST['specialisation'];
     $password  = $_POST['password'];
-    $admin     = isset($_POST['admin']) ? 1 : 0;
+    $admin     = 0;
 
     // Vérifier e-mail unique
     $check = $conn->prepare("SELECT code_medecin FROM medecin WHERE email = ?");
