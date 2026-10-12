@@ -13,7 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init theme
   const savedTheme = localStorage.getItem(themeKey);
-  if (savedTheme === 'dark') body.classList.add('dark');
+  const isInitiallyDark = (savedTheme === 'dark');
+  if (isInitiallyDark) {
+    body.classList.add('dark');
+    document.documentElement.setAttribute('data-bs-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-bs-theme', 'light');
+  }
+  themeBtns.forEach(toggle => {
+    const icon = toggle.querySelector('i');
+    if (icon) icon.className = isInitiallyDark ? 'bi bi-sun' : 'bi bi-moon-stars';
+  });
 
   // Init sidebar collapsed
   const savedCollapsed = localStorage.getItem(sidebarKey);
@@ -23,11 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
   themeBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      body.classList.toggle('dark');
-      localStorage.setItem(themeKey, body.classList.contains('dark') ? 'dark' : 'light');
+      const isDark = body.classList.toggle('dark');
+      localStorage.setItem(themeKey, isDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-bs-theme', isDark ? 'dark' : 'light');
       themeBtns.forEach(toggle => {
         const icon = toggle.querySelector('i');
-        if (icon) icon.className = body.classList.contains('dark') ? 'bi bi-sun' : 'bi bi-moon-stars';
+        if (icon) icon.className = isDark ? 'bi bi-sun' : 'bi bi-moon-stars';
       });
     });
   });

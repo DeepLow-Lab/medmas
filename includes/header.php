@@ -10,10 +10,13 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <title>MEDMAS | Gestion clinique</title>
 
-    <!-- CSS principal -->
-    <link rel="stylesheet" href="assets/styles.css">
+    <!-- Bootstrap CSS & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="assets/styles.css?v=<?= file_exists(__DIR__ . '/../assets/styles.css') ? filemtime(__DIR__ . '/../assets/styles.css') : '1.1' ?>">
+
 
 </head>
 
@@ -46,4 +49,4 @@ if (session_status() === PHP_SESSION_NONE) {
                 <a href="logout.php" class="logout"><i class="bi bi-box-arrow-right"></i> Déconnexion</a>
             </div>
         </div>
-<script src="assets/js/main.js" defer></script>
+<script src="assets/js/main.js?v=<?= file_exists(__DIR__ . '/../assets/js/main.js') ? filemtime(__DIR__ . '/../assets/js/main.js') : '1.1' ?>" defer></script>

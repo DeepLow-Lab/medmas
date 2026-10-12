@@ -49,23 +49,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <?php include "includes/header.php"; ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Ajouter un Médecin</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-</head>
+<div class="container mt-4">
+    <div class="page-toolbar">
+        <h2><i class="bi bi-person-plus"></i> Ajouter un Médecin</h2>
+        <a href="medecins.php" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Retour</a>
+    </div>
 
-<body>
-
-<div>
     <div>
-        <div class="card-header text-center bg-primary text-white">
-            <h3>Ajouter un Médecin</h3>
-        </div>
+        <div>
 
         <div class="card-body">
             <?php if ($success): ?>
@@ -127,16 +119,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label class="form-check-label">Administrateur (accès complet)</label>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100">Ajouter</button>
+                <div class="d-flex align-items-center gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> Ajouter</button>
+                    <a href="medecins.php" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Annuler</a>
+                </div>
 
             </form>
-        </div>
-
-        <div class="card-footer text-center">
-            <a href="medecins.php" class="btn btn-secondary" style="margin-top:7px;">Retour</a>
         </div>
     </div>
 </div>
 
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>

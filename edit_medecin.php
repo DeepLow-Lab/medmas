@@ -57,22 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <?php include "includes/header.php"; ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Modifier Médecin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
 
-<body>
-
-<div>
+<div class="container mt-4">
+    <div class="page-toolbar">
+        <h2><i class="bi bi-pencil-square"></i> Modifier Médecin</h2>
+        <a href="medecins.php" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Retour</a>
+    </div>
 
     <div>
-        <div class="card-header bg-warning text-dark text-center">
-            <h3>Modifier Médecin</h3>
-        </div>
 
         <div>
 
@@ -124,16 +116,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label class="form-check-label">Administrateur</label>
                 </div>
 
-                <button type="submit" class="btn btn-warning w-100">Mettre à jour</button>
+                <div class="d-flex align-items-center gap-2 mt-4">
+                    <button type="submit" class="btn btn-warning"><i class="bi bi-check-lg"></i> Mettre à jour</button>
+                    <a href="medecins.php" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Annuler</a>
+                </div>
 
             </form>
-        </div>
-                <br>
-        <div class="card-footer text-center">
-            <a href="medecins.php" class="btn btn-secondary">Retour</a>
         </div>
     </div>
 </div>
 
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>

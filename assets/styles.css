@@ -33,7 +33,7 @@ a:hover { color: var(--medical-primary-dark); }
     height: 100vh;
     overflow-y: auto;
     padding: 22px 14px;
-    background: var(--medical-ink);
+    background: #20313c;
     color: #fff;
     box-shadow: 8px 0 24px rgba(18, 48, 74, .12);
     transition: width .28s ease, transform .28s ease;
@@ -124,15 +124,125 @@ h1, h2, h3, h4 { color: var(--medical-ink); font-weight: 700; }
 .container > .d-flex:first-child, .container > .page-header {
     padding-bottom: 18px; border-bottom: 1px solid var(--medical-border); margin-bottom: 22px;
 }
-.input-group { max-width: 760px; }
-
-input, select, textarea, .form-control {
-    border: 1px solid var(--medical-border) !important; border-radius: 8px !important;
-    padding: 11px 13px !important; color: var(--medical-ink);
+/* Input Group Fix - Empêche le bouton de descendre et aligne l'icône de recherche */
+.input-group {
+    max-width: 760px;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    position: relative;
+    width: 100%;
 }
-input:focus, select:focus, textarea:focus, .form-control:focus {
+
+.input-group > .input-group-text {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 10px 14px !important;
+    background-color: var(--medical-surface) !important;
+    border: 1px solid var(--medical-border) !important;
+    border-right: 0 !important;
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    color: var(--medical-muted) !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    z-index: 1;
+}
+
+.input-group > .form-control,
+.input-group > input:not([type="checkbox"]):not([type="radio"]) {
+    width: 1% !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    border-radius: 0 !important;
+    border-left: 0 !important;
+    z-index: 1;
+}
+
+.input-group > .form-control:focus,
+.input-group > input:focus {
+    border-left: 1px solid var(--medical-accent) !important;
+    margin-left: -1px !important;
+    z-index: 3 !important;
+}
+
+.input-group > .btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 10px 18px !important;
+    border-radius: 0 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    z-index: 2;
+}
+
+.input-group > .btn:last-child {
+    border-top-right-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.input-group > .btn:first-child {
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.input-group > .btn + .btn {
+    margin-left: 0 !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+
+label, .form-label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--medical-ink);
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea,
+.form-control,
+.form-select {
+    width: 100% !important;
+    display: block;
+    border: 1px solid var(--medical-border) !important;
+    border-radius: 8px !important;
+    padding: 10px 14px !important;
+    color: var(--medical-ink);
+    background-color: var(--medical-surface);
+    font-size: 0.94rem;
+    line-height: 1.5;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input::placeholder,
+select::placeholder,
+textarea::placeholder,
+.form-control::placeholder {
+    color: var(--medical-muted) !important;
+    opacity: 1 !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.form-control:focus,
+.form-select:focus {
     border-color: var(--medical-accent) !important;
-    box-shadow: 0 0 0 3px rgba(79,137,132,.14) !important; outline: 0;
+    box-shadow: 0 0 0 3px rgba(79, 137, 132, 0.16) !important;
+    outline: 0;
 }
 .btn {
     border: 0; border-radius: 9px; padding: 10px 16px; font-weight: 650;
@@ -144,6 +254,113 @@ input:focus, select:focus, textarea:focus, .form-control:focus {
 .btn-success { background: var(--medical-accent); border-color: var(--medical-accent); }
 .btn-danger, .btn_retour { background: var(--medical-danger); }
 .btn-secondary { background: #6b7e8f; border-color: #6b7e8f; }
+
+/* Table Action Buttons & Standard Button Sizes */
+.btn-sm, .table-actions .btn {
+    padding: 6px 12px !important;
+    font-size: 0.84rem !important;
+    line-height: 1.4 !important;
+    border-radius: 7px !important;
+    font-weight: 600 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.table-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+.table-actions .btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-warning {
+    background-color: #f59e0b !important;
+    border-color: #f59e0b !important;
+    color: #ffffff !important;
+}
+.btn-warning:hover {
+    background-color: #d97706 !important;
+    border-color: #d97706 !important;
+    color: #ffffff !important;
+}
+
+.btn-danger {
+    background-color: #e02424 !important;
+    border-color: #e02424 !important;
+    color: #ffffff !important;
+}
+.btn-danger:hover {
+    background-color: #c81e1e !important;
+    border-color: #c81e1e !important;
+    color: #ffffff !important;
+}
+
+.btn-info {
+    background-color: #0284c7 !important;
+    border-color: #0284c7 !important;
+    color: #ffffff !important;
+}
+.btn-info:hover {
+    background-color: #0369a1 !important;
+    border-color: #0369a1 !important;
+    color: #ffffff !important;
+}
+
+/* Sticky Header for Patients & Scrollable Table */
+.patients-sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--medical-surface);
+    padding: 6px 0 16px;
+    border-bottom: 1px solid var(--medical-border);
+    margin-bottom: 18px;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.scrollable-table {
+    max-height: calc(100vh - 290px);
+    min-height: 320px;
+    overflow-y: auto;
+    overflow-x: auto;
+    border: 1px solid var(--medical-border);
+    border-radius: 8px;
+    background: var(--medical-surface);
+}
+
+.scrollable-table table {
+    margin-top: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+
+.scrollable-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--medical-primary-dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+body.dark .patients-sticky-header {
+    background: #20343b;
+    border-color: #38505a;
+}
+
+body.dark .scrollable-table {
+    background: #20343b;
+    border-color: #38505a;
+}
+
+body.dark .scrollable-table thead th {
+    background: #1b4b5b;
+}
 
 table { width: 100%; margin-top: 22px; border-collapse: separate; border-spacing: 0; overflow: hidden; border: 1px solid var(--medical-border); border-radius: 8px; }
 th, td { padding: 13px 14px; text-align: left; border-bottom: 1px solid var(--medical-border); }
@@ -158,12 +375,92 @@ tbody tr:hover { background: #f0f8fa; }
 .stat-card:nth-child(3) { animation-delay: .14s; }
 @keyframes rise-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-body.dark { background: #172328; color: #e4eef4; }
+body.dark {
+    --medical-canvas: #172328;
+    --medical-surface: #20343b;
+    --medical-border: #38505a;
+    --medical-muted: #8ba2ad;
+    --medical-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    background: #172328;
+    color: #e4eef4;
+}
+body.dark .sidebar {
+    background: #20313c !important;
+    color: #fff !important;
+}
+body.dark .sidebar a,
+body.dark .sidebar .theme-btn {
+    color: rgba(255, 255, 255, 0.78) !important;
+    background: transparent;
+}
+body.dark .sidebar a:hover,
+body.dark .sidebar a.active,
+body.dark .sidebar .theme-btn:hover {
+    color: #fff !important;
+    background: #2a4653 !important;
+}
 body.dark .container, body.dark .card { background: #20343b; border-color: #38505a; color: #e4eef4; }
-body.dark h1, body.dark h2, body.dark h3, body.dark h4 { color: #e0efed; }
-body.dark input, body.dark select, body.dark textarea, body.dark .form-control { background: #172b31; color: #e4eef4; border-color: #38505a !important; }
+body.dark h1, body.dark h2, body.dark h3, body.dark h4, body.dark label, body.dark .form-label { color: #e0efed; }
+body.dark input, 
+body.dark select, 
+body.dark textarea, 
+body.dark .form-control, 
+body.dark .form-select, 
+body.dark .input-group-text,
+body.dark input:focus,
+body.dark select:focus,
+body.dark textarea:focus,
+body.dark .form-control:focus,
+body.dark .form-select:focus { 
+    background-color: #172b31 !important; 
+    color: #e4eef4 !important; 
+    border-color: #38505a !important; 
+    caret-color: #ffffff !important;
+}
+
+body.dark input::placeholder,
+body.dark textarea::placeholder,
+body.dark .form-control::placeholder {
+    color: #8ba2ad !important;
+    opacity: 1 !important;
+}
+
 body.dark tbody tr:hover { background: #203946; }
 body.dark th { background: #1b4b5b; }
+body.dark .input-group-text i,
+body.dark .input-group-text .text-muted { color: #8ba2ad !important; }
+
+
+/* Dashboard Dark Mode */
+body.dark .quick-actions {
+    background: #20343b;
+    border-color: #38505a;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+body.dark .quick-actions h3 {
+    color: #e0efed;
+}
+body.dark .quick-actions .page-toolbar {
+    border-color: #38505a;
+}
+body.dark .quick-action-list a {
+    background: #172b31;
+    border-color: #38505a;
+    color: #e4eef4;
+}
+body.dark .quick-action-list a:hover {
+    background: #223c46;
+    border-color: var(--medical-accent);
+    color: #ffffff;
+}
+body.dark .role-label {
+    color: #7dd3fc;
+    border-color: #38505a;
+    background: #172b31;
+}
+body.dark .eyebrow {
+    color: #8ba2ad;
+}
 
 body.sidebar-collapsed .sidebar { width: 76px; padding-left: 10px; padding-right: 10px; }
 body.sidebar-collapsed .main { margin-left: 76px; }

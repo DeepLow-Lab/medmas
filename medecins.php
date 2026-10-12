@@ -13,38 +13,40 @@ $result = $conn->query("SELECT * FROM medecin ORDER BY nom ASC");
 
 <?php include 'includes/header.php'; ?>
 
-<div class="container mt-5">
+<div class="container mt-4">
     <div class="page-toolbar">
         <h2><i class="bi bi-person-vcard"></i> Médecins</h2>
-        <a href="add_medecin.php" class="btn btn-primary"><i class="bi bi-person-plus"></i> Ajouter un médecin</a>
+        <div class="d-flex align-items-center gap-2">
+            <a href="add_medecin.php" class="btn btn-primary"><i class="bi bi-person-plus"></i> Ajouter un médecin</a>
+            <a href="dashboard.php" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Retour</a>
+        </div>
     </div>
 
-    <div>
-        <div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Spécialisation</th>
+                    <th>Téléphone</th>
+                    <th>Email</th>
+                    <th>Admin</th>
+                    <th style="min-width: 190px;">Actions</th>
+                </tr>
+            </thead>
 
-            <div class="table-wrap"><table>
-                <thead>
-                    <tr>
-                        <th>Code</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Spécialisation</th>
-                        <th>Téléphone</th>
-                        <th>Email</th>
-                        <th>Admin</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody>
+            <tbody>
+            <?php if ($result && $result->num_rows > 0): ?>
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <tr>
-                        <td><?= $row['code_medecin'] ?></td>
-                        <td><?= $row['nom'] ?></td>
-                        <td><?= $row['prenom'] ?></td>
-                        <td><?= $row['specialisation'] ?></td>
-                        <td><?= $row['telephone'] ?></td>
-                        <td><?= $row['email'] ?></td>
+                        <td><?= htmlspecialchars($row['code_medecin']) ?></td>
+                        <td><?= htmlspecialchars($row['nom']) ?></td>
+                        <td><?= htmlspecialchars($row['prenom']) ?></td>
+                        <td><?= htmlspecialchars($row['specialisation']) ?></td>
+                        <td><?= htmlspecialchars($row['telephone']) ?></td>
+                        <td><?= htmlspecialchars($row['email']) ?></td>
                         <td>
                             <?php if ($row['is_admin'] == 1): ?>
                                 <span class="badge bg-success">Admin</span>
@@ -53,26 +55,27 @@ $result = $conn->query("SELECT * FROM medecin ORDER BY nom ASC");
                             <?php endif; ?>
                         </td>
                         <td>
-                            <a href="edit_medecin.php?id=<?= $row['code_medecin'] ?>" class="btn btn-warning btn-sm">Modifier</a>
-                            <br>
-                            <a href="delete.php?id=<?= $row['code_medecin'] ?>" 
-                               onclick="return confirm('Voulez-vous vraiment supprimer ce médecin ?');"
-                               class="btn btn-danger btn-sm">Supprimer</a>
+                            <div class="table-actions">
+                                <a href="edit_medecin.php?id=<?= $row['code_medecin'] ?>" class="btn btn-warning btn-sm">
+                                    <i class="bi bi-pencil"></i> Modifier
+                                </a>
+                                <a href="delete.php?id=<?= $row['code_medecin'] ?>" 
+                                   onclick="return confirm('Voulez-vous vraiment supprimer ce médecin ?');"
+                                   class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash3"></i> Supprimer
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 <?php endwhile; ?>
-                </tbody>
-
-            </table></div>
-
-        </div>
+            <?php else: ?>
+                <tr>
+                    <td colspan="8" class="text-center text-muted">Aucun médecin trouvé.</td>
+                </tr>
+            <?php endif; ?>
+            </tbody>
+        </table>
     </div>
-
-    <div class="mt-3">
-        <a href="dashboard.php" class="btn btn-secondary">Retour au Dashboard</a>
-    </div>
-
 </div>
 
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>
